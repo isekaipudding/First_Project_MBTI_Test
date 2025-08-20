@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 성격유형 테스트</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 시작 화면 -->
+        <div id="start-screen" class="screen active">
+            <div class="content">
+                <h1 class="title">MBTI 성격유형 테스트</h1>
+                <div class="subtitle">나의 성격을 알아보는 여정을 시작해보세요</div>
+                <div class="description">
+                    <p>이 테스트는 4단계로 구성되어 있으며, 각 단계마다 당신의 성격 특성을 파악하는 질문들이 나옵니다.</p>
+                    <p>솔직하고 편안한 마음으로 답변해주세요!</p>
+                    <p>(각 지표마다 중간도 있습니다! 이것을 통해 반반인 경우도 확인해주세요!)</p>
+                </div>
+                <div class="action-buttons">
+                    <button id="start-btn" class="btn btn-primary">테스트 시작하기</button>
+                    <button id="view-all-types-btn-start" class="btn btn-secondary">모든 MBTI 유형 확인하기</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 화면 -->
+        <div id="phase-screen" class="screen">
+            <div class="content">
+                <div class="phase-header">
+                    <div class="phase-title" id="phase-title"></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="question-counter" id="question-counter"></div>
+                </div>
+                
+                <div class="question-container">
+                    <div class="question-text" id="question-text"></div>
+                    <div class="options-container" id="options-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 타이브레이커 화면 -->
+        <div id="tiebreaker-screen" class="screen">
+            <div class="content">
+                <div class="tiebreaker-header">
+                    <h2>타이브레이커 질문</h2>
+                    <p>이 지표에서 점수가 동점이어서 추가 질문을 드립니다.</p>
+                </div>
+                
+                <div class="question-container">
+                    <div class="question-text" id="tiebreaker-question-text"></div>
+                    <div class="options-container" id="tiebreaker-options-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 화면 -->
+        <div id="result-screen" class="screen">
+            <div class="content">
+                <div class="result-header">
+                    <h1>당신의 MBTI 유형은</h1>
+                    <div class="mbti-result" id="mbti-result"></div>
+                </div>
+                
+                <div class="result-description">
+                    <h3 id="result-title"></h3>
+                    <p id="result-description"></p>
+                </div>
+
+                <div class="score-breakdown">
+                    <h3>각 지표별 점수</h3>
+                    <div class="score-grid">
+                        <div class="score-item">
+                            <span class="score-label-left">I</span>
+                            <span class="score-label-center"> </span>
+                            <span class="score-label-right">E</span>
+                            <div class="score-bar">
+                                <div class="score-fill" id="ei-score"></div>
+                            </div>
+                            <span class="score-value" id="ei-value"></span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label-left">N</span>
+                            <span class="score-label-center"> </span>
+                            <span class="score-label-right">S</span>
+                            <div class="score-bar">
+                                <div class="score-fill" id="sn-score"></div>
+                            </div>
+                            <span class="score-value" id="sn-value"></span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label-left">F</span>
+                            <span class="score-label-center"> </span>
+                            <span class="score-label-right">T</span>
+                            <div class="score-bar">
+                                <div class="score-fill" id="tf-score"></div>
+                            </div>
+                            <span class="score-value" id="tf-value"></span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label-left">P</span>
+                            <span class="score-label-center"> </span>
+                            <span class="score-label-right">J</span>
+                            <div class="score-bar">
+                                <div class="score-fill" id="jp-score"></div>
+                            </div>
+                            <span class="score-value" id="jp-value"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dimension-details">
+                    <h3>세부 지표 결과</h3>
+                    <div class="dimension-grid">
+                        <div class="dimension-item">
+                            <div class="dimension-header">
+                                <span class="dimension-label">에너지 방향 (E/I)</span>
+                                <span class="dimension-trend" id="ei-trend"></span>
+                            </div>
+                            <p id="ei-detail"></p>
+                        </div>
+                        <div class="dimension-item">
+                            <div class="dimension-header">
+                                <span class="dimension-label">정보 수집 방식 (S/N)</span>
+                                <span class="dimension-trend" id="sn-trend"></span>
+                            </div>
+                            <p id="sn-detail"></p>
+                        </div>
+                        <div class="dimension-item">
+                            <div class="dimension-header">
+                                <span class="dimension-label">판단 기준 (T/F)</span>
+                                <span class="dimension-trend" id="tf-trend"></span>
+                            </div>
+                            <p id="tf-detail"></p>
+                        </div>
+                        <div class="dimension-item">
+                            <div class="dimension-header">
+                                <span class="dimension-label">생활 양식 (J/P)</span>
+                                <span class="dimension-trend" id="jp-trend"></span>
+                            </div>
+                            <p id="jp-detail"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="retake-btn" class="btn btn-secondary">다시 테스트하기</button>
+                    <button id="share-btn" class="btn btn-primary">결과 공유하기</button>
+                    <button id="view-all-types-btn" class="btn btn-primary">모든 MBTI 유형 확인하기</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 모든 MBTI 유형 화면 -->
+        <div id="all-types-screen" class="screen">
+            <div class="content">
+                <div class="all-types-header">
+                    <h1>모든 MBTI 유형</h1>
+                    <p>16가지 성격 유형을 확인해보세요</p>
+                </div>
+                
+                <div class="mbti-grid">
+                    <div class="mbti-type-btn" data-type="INTJ">INTJ</div>
+                    <div class="mbti-type-btn" data-type="INTP">INTP</div>
+                    <div class="mbti-type-btn" data-type="ENTJ">ENTJ</div>
+                    <div class="mbti-type-btn" data-type="ENTP">ENTP</div>
+                    <div class="mbti-type-btn" data-type="INFJ">INFJ</div>
+                    <div class="mbti-type-btn" data-type="INFP">INFP</div>
+                    <div class="mbti-type-btn" data-type="ENFJ">ENFJ</div>
+                    <div class="mbti-type-btn" data-type="ENFP">ENFP</div>
+                    <div class="mbti-type-btn" data-type="ISTJ">ISTJ</div>
+                    <div class="mbti-type-btn" data-type="ISFJ">ISFJ</div>
+                    <div class="mbti-type-btn" data-type="ESTJ">ESTJ</div>
+                    <div class="mbti-type-btn" data-type="ESFJ">ESFJ</div>
+                    <div class="mbti-type-btn" data-type="ISTP">ISTP</div>
+                    <div class="mbti-type-btn" data-type="ISFP">ISFP</div>
+                    <div class="mbti-type-btn" data-type="ESTP">ESTP</div>
+                    <div class="mbti-type-btn" data-type="ESFP">ESFP</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 개별 MBTI 유형 상세 화면 -->
+        <div id="type-detail-screen" class="screen">
+            <div class="content">
+                <div class="type-detail-header">
+                    <h1 id="detail-mbti-type"></h1>
+                    <h2 id="detail-type-title"></h2>
+                </div>
+                
+                <div class="type-detail-description">
+                    <p id="detail-type-description"></p>
+                </div>
+
+                <div class="type-detail-actions">
+                    <button id="take-test-btn" class="btn btn-primary">테스트 하러 가기</button>
+                    <button id="back-to-all-types-btn" class="btn btn-secondary">다른 MBTI 유형 확인하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
